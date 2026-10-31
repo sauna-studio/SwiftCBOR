@@ -69,6 +69,8 @@ APIキー・秘密鍵・DBパスワードなどの認証情報が必要になっ
 
 公式の外部ライブラリを優先し、独自実装の必要性を確認する。不具合は再現・既存Issue/PR確認・回帰テストを先に行い、必要ならforkで最小差分を修正して固定revisionで利用する。採用理由・license・上流との差分・本家PR・解消条件をADRへ記録し、上流へ還元できる形に保つ。必要なリポジトリ追加はユーザー承認済みだが、不要なforkや広い権限付与は行わない。
 
+共通規則適用元: `sauna-studio/.github@9dea4f7573566f085edad2733d31aa092d646a44` (`AGENTS.md`)。
+
 ## SwiftCBOR dependency fork
 
 This public dependency fork retains upstream LICENSE and source ownership. It exists only to consume the minimal progressive-array decoding fix from valpackett/SwiftCBOR PR #120 (3de9fbf7f9592be6448f687cd17ef34d81871332 and c0a7c37a8752585e8f7b16ab9119562a22aaad28), with original authorship and cherry-pick provenance retained. Do not open a duplicate upstream PR; track the existing PR and remove the fork dependency when an adequate upstream release is available. This is a library, not a Sauna application: upstream API/backward compatibility policy is preserved. No credentials or database are required.
