@@ -1,0 +1,11 @@
+# Minimal SwiftCBOR consumer fix
+
+Upstream: [valpackett/SwiftCBOR](https://github.com/valpackett/SwiftCBOR), existing [issue #118](https://github.com/valpackett/SwiftCBOR/issues/118) and [PR #120](https://github.com/valpackett/SwiftCBOR/pull/120). This fork cherry-picks the two commits ending at `c0a7c37a8752585e8f7b16ab9119562a22aaad28`, preserving original authorship and provenance. LICENSE is unchanged. No duplicate upstream contribution is opened.
+
+The change grows decoded arrays as items are read instead of allocating from an untrusted declared count. It is the small upstream fix and its regression, rather than the broader decoder redesign in PR #122. This does not make SwiftCBOR a general resource-bounded decoder: Sauna's WebAuthn wrapper retains its own byte/depth/framing restrictions.
+
+The dedicated workflow uses read-only permissions, non-persistent checkout credentials, full action/image pins and `--jobs 2`. This dependency-free package needs no lockfile. Existing upstream CI remains unchanged and uses mutable action/image references; the narrow workflow does not claim to harden their transitive execution. Consumer applications keep their own resolved dependency revision.
+
+Remove the fork when an upstream release containing an adequate fix is available, after consumer regression suites pass.
+
+Local validation (2026-11-01): Apple Swift 6.4.2 `swift build --jobs 2` and `swift test --jobs 2` passed (78 XCTest cases, zero failures). `actionlint .github/workflows/sauna-compatibility.yml` and `git diff --check` passed. Independent Review/Security agents inspect the fix and workflow; GitHub CI/Codex results are tracked on the fork PR and remain a separate merge gate.
